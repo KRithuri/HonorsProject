@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Explainable ML for Financial Fraud Detection: Summary</title>
+<style>
+:root{--bg:#0b1426;--card:#13213f;--line:#2e4a7a;--text:#f3f0e8;--muted:#b8c4da;--amber:#ffb703;--teal:#3dd6c6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3f0e8;--card:#fff;--line:#c9d2e3;--text:#13213f;--muted:#44547a;--amber:#b86e00;--teal:#0b7f75}}
+:root[data-theme="dark"]{--bg:#0b1426;--card:#13213f;--line:#2e4a7a;--text:#f3f0e8;--muted:#b8c4da;--amber:#ffb703;--teal:#3dd6c6}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Calibri,Arial,sans-serif;line-height:1.55}
+main{max-width:720px;margin:0 auto;padding:28px 18px 40px}
+h1{font-family:Cambria,Georgia,serif;font-size:1.9rem;line-height:1.2;margin:0 0 6px;color:var(--amber)}
+.sub{color:var(--muted);margin:0 0 4px}
+.by{color:var(--muted);font-size:.9rem;margin:0 0 24px}
+h2{font-family:Cambria,Georgia,serif;font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin:30px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.key{font-size:1.25rem}
+.key b{color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:560px){.stats{grid-template-columns:repeat(3,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.stat .n{font-family:Cambria,Georgia,serif;font-size:1.6rem;font-weight:700;color:var(--amber)}
+.stat .l{font-size:.85rem;color:var(--muted)}
+.bars{margin:14px 0 6px}
+.row{display:grid;grid-template-columns:44px 1fr 56px;align-items:center;gap:10px;margin:8px 0}
+.row .f{font-weight:700}
+.track{height:18px;background:rgba(128,150,190,.18);border-radius:4px;position:relative}
+.bar{position:absolute;top:0;height:100%;border-radius:4px}
+.pos{background:var(--amber);left:50%}
+.neg{background:var(--teal);right:50%}
+.mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--muted)}
+.val{text-align:right;font-variant-numeric:tabular-nums}
+.legend{font-size:.85rem;color:var(--muted)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:.92rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:600}
+tr.hl td{color:var(--amber);font-weight:700}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.steps span{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.88rem}
+.note{color:var(--muted);font-size:.92rem}
+footer{margin-top:30px;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<h1>Explainable Machine Learning for Financial Fraud Detection</h1>
+<p class="sub">Implications for South African Retirement Fund Administration</p>
+<p class="by">Karabo Mmaphefo Gift Rithuri · Supervisor: Mr Tsholofelo Mokheleli<br>Department of Applied Information Systems, College of Business and Economics, University of Johannesburg</p>
+
+<h2>Key finding</h2>
+<div class="card key">XGBoost caught about <b>85% of fraud</b> with just <b>1.6 alerts per 1,000 transactions</b>, and SHAP shows why each alert was raised.</div>
+
+<h2>Key figures</h2>
+<div class="stats">
+<div class="stat"><div class="n">284,807</div><div class="l">transactions</div></div>
+<div class="stat"><div class="n">492</div><div class="l">fraud cases</div></div>
+<div class="stat"><div class="n">0.173%</div><div class="l">fraud rate</div></div>
+<div class="stat"><div class="n">30</div><div class="l">predictors</div></div>
+<div class="stat"><div class="n">0.8484</div><div class="l">XGBoost AUPRC</div></div>
+<div class="stat"><div class="n">1.61</div><div class="l">XGBoost alerts per 1,000</div></div>
+</div>
+
+<h2>Models compared</h2>
+<div class="card scroll">
+<table>
+<tr><th>Model</th><th>AUPRC</th><th>Precision</th><th>Recall</th><th>Alerts / 1,000</th></tr>
+<tr><td>Logistic Regression</td><td>0.6881</td><td>0.5702</td><td>0.8784</td><td>2.67</td></tr>
+<tr><td>Decision Tree</td><td>0.4763</td><td>0.6337</td><td>0.9649</td><td>2.36</td></tr>
+<tr><td>Random Forest</td><td>0.8141</td><td>0.8649</td><td>0.8649</td><td>1.73</td></tr>
+<tr class="hl"><td>XGBoost</td><td>0.8484</td><td>0.8986</td><td>0.8493</td><td>1.61</td></tr>
+</table>
+<p class="note" style="margin:10px 0 0">XGBoost at its 0.39 threshold had the highest precision and MCC (0.8674) and the lowest alert rate. On the hold-out test it found 63 of 74 frauds.</p>
+</div>
+
+<h2>One transaction, explained</h2>
+<div class="card">
+<div class="steps"><span>1 Scored</span><span>2 Explained (SHAP)</span><span>3 Reviewed</span></div>
+<p style="margin:0 0 6px">XGBoost flags a transaction when its score passes 0.39. SHAP then shows which features pushed that one case toward fraud or toward legitimate.</p>
+<div class="bars" role="img" aria-label="SHAP contributions: V14 plus 5.98, V7 minus 3.16, V16 minus 1.51, V17 minus 1.02">
+<div class="row"><span class="f">V14</span><div class="track"><div class="mid"></div><div class="bar pos" style="width:50%"></div></div><span class="val">+5.98</span></div>
+<div class="row"><span class="f">V7</span><div class="track"><div class="mid"></div><div class="bar neg" style="width:26.4%"></div></div><span class="val">−3.16</span></div>
+<div class="row"><span class="f">V16</span><div class="track"><div class="mid"></div><div class="bar neg" style="width:12.6%"></div></div><span class="val">−1.51</span></div>
+<div class="row"><span class="f">V17</span><div class="track"><div class="mid"></div><div class="bar neg" style="width:8.5%"></div></div><span class="val">−1.02</span></div>
+</div>
+<p class="legend">Amber = toward fraud · Teal = toward legitimate</p>
+<p class="note" style="margin:8px 0 0">Across the whole dataset SHAP ranked V14, V4 and V12 highest (mean |SHAP| 3.41, 2.13 and 1.27). An analyst reviews every alert and makes the final call.</p>
+</div>
+
+<h2>Read with care</h2>
+<div class="card note">The data is a public European credit-card dataset with anonymised features (V1–V28), so SHAP describes model behaviour, not the causes of fraud. No South African retirement-fund data was available, so the 0.39 threshold and these results must be validated locally before any use.</div>
+
+<footer>Research poster summary · University of Johannesburg</footer>
+</main>
+</body>
+</html>
